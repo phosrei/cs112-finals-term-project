@@ -449,8 +449,8 @@ public class RamosProgramming1Project {
             switch (chooseOption(1, 6)) {
                 case 1 -> addAndSortStudentList();
                 case 2 -> sortSalesmenList();
-                case 3 -> sortStudentsByName();
-                case 4 -> sortStudentsByGrade();
+                case 3 -> sortStudentsBy("name");
+                case 4 -> sortStudentsBy("grade");
                 case 5 -> backToMainMenu = true;
             }
         } while (!backToMainMenu);
@@ -496,40 +496,7 @@ public class RamosProgramming1Project {
                 System.out.print("Enter name of student " + (z + 1) + ": ");
                 names[z] = scanner.nextLine();
             }
-            System.out.println("\n" + Arrays.toString(sortByName(names)));
-        } while (useProgramAgain());
-    }
-
-    public static void sortStudentsByGrade() {
-        do {
-            Scanner scanner = new Scanner(System.in);
-
-            int n = getInteger("How many students will be sorted? ");
-            String[] names = new String[n];
-            double[] grades = new double[n];
-
-            // Populate arrays names and grades
-            for (int z = 0; z < names.length; z++) {
-                System.out.print("Enter name of student " + (z + 1) + ": ");
-                names[z] = scanner.nextLine();
-                double grade;
-
-                while (true) {
-                    grade = getDouble("Enter grade of " + names[z] + ": ");
-                    if (grade >= 0 && grade <= 100) {
-                        break;
-                    }
-                    System.out.println("Grade must be between 0 and 100");
-                }
-                grades[z] = grade;
-            }
-
-            sortByNum(names, grades);
-
-            System.out.println();
-            for (int i = 0; i < names.length; i++) {
-                System.out.printf("Name: %s, Grade: %.2f%n", names[i], grades[i]);
-            }
+            System.out.println("\n" + Arrays.toString(sortString(names)));
         } while (useProgramAgain());
     }
 
@@ -555,7 +522,7 @@ public class RamosProgramming1Project {
         }
     }
 
-    public static void sortStudentsByName() {
+    public static void sortStudentsBy(String option) {
         do {
             Scanner scanner = new Scanner(System.in);
 
@@ -579,8 +546,12 @@ public class RamosProgramming1Project {
                 grades[z] = grade;
             }
 
-            // Sort the students based on names
-            sortString(names, grades);
+            // Sort the students based on option variable
+            if (option.equals("name")) {
+                sortString(names, grades);
+            } else {
+                sortByNum(names, grades);
+            }
 
             // Display sorted result
             for (int i = 0; i < names.length; i++) {
@@ -590,20 +561,16 @@ public class RamosProgramming1Project {
     }
 
     public static void sortString(String[] names, double[] grades) {
-        int n = names.length;
-        String tempName;
-        double tempGrade;
-
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - 1 - i; j++) {
+        for (int i = 0; i < names.length - 1; i++) {
+            for (int j = 0; j < names.length - 1 - i; j++) {
                 if (names[j].compareTo(names[j + 1]) > 0) { // Sort in ascending order by name
                     // Swap names
-                    tempName = names[j];
+                    String tempName = names[j];
                     names[j] = names[j + 1];
                     names[j + 1] = tempName;
 
                     // Swap corresponding grades
-                    tempGrade = grades[j];
+                    double tempGrade = grades[j];
                     grades[j] = grades[j + 1];
                     grades[j + 1] = tempGrade;
                 }
@@ -611,20 +578,18 @@ public class RamosProgramming1Project {
         }
     }
 
-    public static String[] sortByName(String[] names) {
-        int n = names.length;
-        String tempName;
-
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - 1 - i; j++) {
+    public static String[] sortString(String[] names) {
+        for (int i = 0; i < names.length - 1; i++) {
+            for (int j = 0; j < names.length - 1 - i; j++) {
                 if (names[j].compareTo(names[j + 1]) > 0) { // Sort in ascending order by name
                     // Swap names
-                    tempName = names[j];
+                    String tempName = names[j];
                     names[j] = names[j + 1];
                     names[j + 1] = tempName;
                 }
             }
         }
+
         return names;
     }
 
