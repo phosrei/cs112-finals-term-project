@@ -1,3 +1,9 @@
+/*
+Name: Ramos, Ricky Marc S.
+Date: 07/12/24
+Class: CS112 9313
+ */
+
 package finals.exercises;
 
 import java.util.Arrays;
@@ -26,7 +32,7 @@ public class RamosProgramming1Project {
         do {
             showMiscellaneousRoutinesMenu();
 
-            switch (chooseOption(1, 10)) {
+            switch (chooseOption(1, 11)) {
                 case 1 -> playNumberGuessingGame();
                 case 2 -> covid19SelfEvaluation();
                 case 3 -> calculateBillsDistribution();
@@ -443,8 +449,8 @@ public class RamosProgramming1Project {
             switch (chooseOption(1, 6)) {
                 case 1 -> addAndSortStudentList();
                 case 2 -> sortSalesmenList();
-                case 3 -> sortStudentsByGrade();
-                case 4 -> sortStudentsByName();
+                case 3 -> sortStudentsByName();
+                case 4 -> sortStudentsByGrade();
                 case 5 -> backToMainMenu = true;
             }
         } while (!backToMainMenu);
@@ -561,8 +567,8 @@ public class RamosProgramming1Project {
             for (int z = 0; z < names.length; z++) {
                 System.out.print("Enter name of student " + (z + 1) + ": ");
                 names[z] = scanner.nextLine();
-                double grade;
 
+                double grade;
                 while (true) {
                     grade = getDouble("Enter grade of " + names[z] + ": ");
                     if (grade >= 0 && grade <= 100) {
@@ -574,7 +580,7 @@ public class RamosProgramming1Project {
             }
 
             // Sort the students based on names
-            sortByName(names, grades);
+            sortString(names, grades);
 
             // Display sorted result
             for (int i = 0; i < names.length; i++) {
@@ -583,7 +589,7 @@ public class RamosProgramming1Project {
         } while (useProgramAgain());
     }
 
-    public static void sortByName(String[] names, double[] grades) {
+    public static void sortString(String[] names, double[] grades) {
         int n = names.length;
         String tempName;
         double tempGrade;
