@@ -1049,13 +1049,13 @@ public static double getDouble(String message) {
         do {
             System.out.println("\n-- DECIMAL TO BINARY CONVERTER --");
             int decimal = getInteger("Enter a decimal number: ");
-            String binary = "";
+            StringBuilder binary = new StringBuilder();
 
             if (decimal == 0) {
-                binary = "0";
+                binary = new StringBuilder("0");
             } else {
                 while (decimal > 0) {
-                    binary = (decimal % 2) + binary;
+                    binary.insert(0, (decimal % 2));
                     decimal /= 2;
                 }
             }
